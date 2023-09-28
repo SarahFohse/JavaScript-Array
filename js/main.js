@@ -45,6 +45,7 @@ addEmail.addEventListener('click', event => {
 //add image creates img in html for user div
 
 addImage.addEventListener('click', () => {
+  
   let newImage = document.createElement('img');
   newImage.src = image.src;
   document.getElementById(emailInput.value).appendChild(newImage);
