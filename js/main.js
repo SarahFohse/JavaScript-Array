@@ -30,6 +30,10 @@ const displayEmail = document.getElementById('error-email');
 
 addEmail.addEventListener('click', event => {
   event.preventDefault();
+
+  //
+  validateInputs();
+  //
   currentEmail = emailInput.value;
   displayEmail.innerText = `Current email: ${currentEmail == '' ? 'No email entered.' : currentEmail}`;
   displayEmail.style.display = 'block';
@@ -60,6 +64,41 @@ addEmail.addEventListener('click', event => {
   }
 });
 
+//valid email
+const setError = (element, message) => {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector('.error');
+
+  errorDisplay.innerText = message;
+  inputControl.classList.add('error');
+  inputControl.classList.remove('success')
+}
+
+const setSuccess = element => {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector('.error');
+
+  errorDisplay.innerText = '';
+  inputControl.classList.add('success');
+  inputControl.classList.remove('error');
+};
+
+const isValidEmail = emailInput => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(emailInput).toLowerCase());
+}
+
+const validateInputs = () => {
+  const emailValue = emailInput.value.trim();
+
+ if(emailValue === '') {
+        setError(email, 'Email is required');
+    } else if (!isValidEmail(emailValue)) {
+        setError(emailInput, 'Provide a valid email address');
+    } else {
+        setSuccess(emailInput);
+    }
+};
 
 
 //add image creates img in html for user div and checks if the image has already been linked to the user as it shouldn't display twice
