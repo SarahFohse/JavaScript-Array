@@ -26,6 +26,7 @@ const emailInput = document.getElementById('email');
 let contain = document.getElementById('contain'); 
 let addImage= document.getElementById('addimg');
 const displayEmail = document.getElementById('error-email');
+let clearUser 
 
 
 addEmail.addEventListener('click', event => {
@@ -65,6 +66,12 @@ addEmail.addEventListener('click', event => {
     h3.appendChild(textNode);
     user.appendChild(h3);
     errorMessage.style.display = 'none';
+
+    //clear email button
+    clearUser = document.createElement('button');
+    clearUser.textContent = 'Clear User';
+    clearUser.classList.add('clear-btn')
+    user.appendChild(clearUser);
   }
 });
 
@@ -140,8 +147,12 @@ addImage.addEventListener('click', () => {
     document.getElementById(userList[userNumber].id).appendChild(newImage);
     errorMessage.style.display = 'none';
   } else {
-    errorMessage.innerText = 'Enter an email address!';
+    errorMessage.innerText = 'Click on - add your email address!';
     errorMessage.style.display = 'block';
   }
 })
 
+clearUser.addEventListener('click', () => {
+  const removeAll = document.getElementsByClassName('user-container');
+  removeAll[0].remove()
+})
