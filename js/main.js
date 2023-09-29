@@ -35,8 +35,12 @@ addEmail.addEventListener('click', event => {
   validateInputs();
   //
   currentEmail = emailInput.value;
-  displayEmail.innerText = `Current email: ${currentEmail == '' ? 'No email entered.' : currentEmail}`;
-  displayEmail.style.display = 'block';
+  if (validationCheck) {
+    displayEmail.innerText = `Current email: ${currentEmail == '' ? 'No email entered.' : currentEmail}`;
+    displayEmail.style.display = 'block';
+  } else {
+    displayEmail.style.display = 'none';
+  }
   let emailExists = false;
   userList.forEach((item) => {
     if (item.email == currentEmail) {
@@ -45,7 +49,7 @@ addEmail.addEventListener('click', event => {
   });
 
 
-  if (emailInput.value != '' && !emailExists) {
+  if (emailInput.value != '' && !emailExists && validationCheck === true) {
     userNumber = userList.length;
     userList.push({email: currentEmail, id: `user${Math.random().toString().split('.')[1]}`});
 
@@ -87,16 +91,18 @@ const isValidEmail = emailInput => {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(emailInput).toLowerCase());
 }
-
+let validationCheck = false;
 const validateInputs = () => {
   const emailValue = emailInput.value.trim();
+  validationCheck = false;
 
  if(emailValue === '') {
-        setError(email, 'Email is required');
+        setError(emailInput, 'Email is required');
     } else if (!isValidEmail(emailValue)) {
         setError(emailInput, 'Provide a valid email address');
     } else {
         setSuccess(emailInput);
+        validationCheck = true;
     }
 };
 
@@ -128,7 +134,7 @@ addImage.addEventListener('click', () => {
     errorMessage.innerText = 'Image already added!';
     errorMessage.style.display = 'block';
 
-  } else if (imageExist === false && currentEmail !== undefined && userList.length > 0) {
+  } else if (imageExist === false && currentEmail !== undefined && userList.length > 0 && validationCheck === true) {
     let newImage = document.createElement('img');
     newImage.src = image.src;
     document.getElementById(userList[userNumber].id).appendChild(newImage);
