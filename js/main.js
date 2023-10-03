@@ -58,6 +58,9 @@ addEmail.addEventListener('click', event => {
     user.id = userList[userNumber].id;
     user.classList.add('user-container');
     contain.appendChild(user);
+    let gallery = document.createElement('div');
+    gallery.classList.add('gallery');
+    user.appendChild(gallery);
 
 
     //heading
@@ -120,7 +123,7 @@ const validateInputs = () => {
 
 //add image creates img in html for user div and checks if the image has already been linked to the user as it shouldn't display twice
 const errorMessage = document.getElementById('error-message');
-let maxImages = 15;
+let maxImages = 8;
 
 addImage.addEventListener('click', () => {
   let imageExist = false;
@@ -149,13 +152,16 @@ addImage.addEventListener('click', () => {
     errorMessage.style.display = 'block';
 
   } else if (imageExist === false && currentEmail !== undefined && userList.length > 0 && validationCheck === true && userImageContainer !== undefined && userImageContainer.querySelectorAll('img').length < maxImages) {
+    let span = document.createElement('span');
+    span.style.setProperty('--i', userID.length+1);
     let newImage = document.createElement('img');
     newImage.src = image.src;
-    userImageContainer.appendChild(newImage);
+    span.appendChild(newImage);
+    userImageContainer.querySelector('.gallery').appendChild(span);
     errorMessage.style.display = 'none';
   } else if (userImageContainer !== undefined && userImageContainer.querySelectorAll('img').length == maxImages) {
     //was alert, now error message. Might change
-    errorMessage.innerText = 'You reached the limit of 15 images.';
+    errorMessage.innerText = `You reached the limit of ${maxImages} images.`;
     errorMessage.style.display = 'block';
   } else {
     errorMessage.innerText = 'Click on - add your email address!';
