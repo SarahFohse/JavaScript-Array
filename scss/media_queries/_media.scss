@@ -1,0 +1,99 @@
+@media screen and (min-width: 576px) {
+ 
+
+  
+
+  main {
+    display: flex;
+  }
+
+  #contain {
+    margin: 25px 15px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .gallery {
+    width: 80px; //up to 200
+    top: 35px;
+    left: -70px;
+
+    span {
+      transform: rotateY(calc(var(--i) * 45deg)) translateZ(140px);
+    }
+  }
+  .user-container {
+    height: 400px;
+    width: 350px;
+
+    h3 {
+      inline-size: 310px;
+    }
+  }
+}
+@media screen and (min-width: 992px) {
+  .gallery {
+    width: 80px; //up to 200
+    top: 55px;
+    left: -75px;
+  }
+  #contain {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .user-container {
+    height: 400px;
+    width: 330px;
+
+    h3 {
+      inline-size: 290px;
+    }
+  }
+}
+@media screen and (min-width: 1400px) {
+  .gallery {
+    width: 120px; //up to 200
+    top: 75px;
+    left: -35px;
+
+    span {
+      transform: rotateY(calc(var(--i) * 45deg)) translateZ(180px);
+    }
+  }
+  .user-container {
+    height: 530px;
+    width: 450px;
+
+    h3 {
+      inline-size: 410px;
+    }
+  }
+  #contain {
+    gap: 110px;
+    margin: 25px 80px;
+  }
+}
+@media screen and (min-width: 1800px) {
+  .gallery {
+    width: 180px; //up to 200
+    top: 90px;
+    left: 35px;
+
+    span {
+      transform: rotateY(calc(var(--i) * 45deg)) translateZ(280px);
+    }
+  }
+  .user-container {
+    height: 725px;
+    width: 650px;
+
+    h3 {
+      inline-size: 610px;
+    }
+  }
+  #contain {
+    gap: 110px;
+  }
+}

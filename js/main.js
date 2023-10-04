@@ -58,9 +58,6 @@ addEmail.addEventListener('click', event => {
     user.id = userList[userNumber].id;
     user.classList.add('user-container');
     contain.appendChild(user);
-    let gallery = document.createElement('div');
-    gallery.classList.add('gallery');
-    user.appendChild(gallery);
 
 
     //heading
@@ -75,6 +72,13 @@ addEmail.addEventListener('click', event => {
     clearUser.textContent = 'Clear User';
     clearUser.classList.add('clear-btn')
     user.appendChild(clearUser);
+
+    let gallery = document.createElement('div');
+    gallery.classList.add('gallery');
+    user.appendChild(gallery);
+
+
+    
 
     if (clearAll.style.display == 'none') {
       clearAll.style.display = 'block';
