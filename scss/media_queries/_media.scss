@@ -1,8 +1,5 @@
 @media screen and (min-width: 576px) {
  
-
-  
-
   main {
     display: flex;
   }
@@ -14,9 +11,10 @@
     gap: 30px;
   }
 }
+
 @media screen and (min-width: 768px) {
   .gallery {
-    width: 80px; //up to 200
+    width: 80px;
     top: 35px;
     left: -70px;
 
@@ -33,9 +31,10 @@
     }
   }
 }
+
 @media screen and (min-width: 992px) {
   .gallery {
-    width: 80px; //up to 200
+    width: 80px;
     top: 55px;
     left: -75px;
   }
@@ -52,9 +51,10 @@
     }
   }
 }
+
 @media screen and (min-width: 1400px) {
   .gallery {
-    width: 120px; //up to 200
+    width: 120px;
     top: 75px;
     left: -35px;
 
@@ -72,12 +72,13 @@
   }
   #contain {
     gap: 110px;
-    margin: 25px 80px;
+    margin: 25px 48px;
   }
 }
+
 @media screen and (min-width: 1800px) {
   .gallery {
-    width: 180px; //up to 200
+    width: 180px;
     top: 90px;
     left: 35px;
 
