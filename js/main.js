@@ -28,6 +28,10 @@ let addImage= document.getElementById('addimg');
 const displayEmail = document.getElementById('error-email');
 let clearUser;
 const clearAll = document.getElementById('clear-all');
+let currentUser;
+let galleryNav = document.querySelectorAll('.navigation .button');
+let currentGallery = 0;
+let galleries;
 
 addEmail.addEventListener('click', event => {
   event.preventDefault();
@@ -50,6 +54,7 @@ addEmail.addEventListener('click', event => {
   });
 
 
+
   if (emailInput.value != '' && !emailExists && validationCheck === true) {
     userNumber = userList.length;
     userList.push({email: currentEmail, id: `user${Math.random().toString().split('.')[1]}`});
@@ -58,7 +63,8 @@ addEmail.addEventListener('click', event => {
     user.id = userList[userNumber].id;
     user.classList.add('user-container');
     contain.appendChild(user);
-
+    
+    selectDiv(user);
 
     //heading
     let h3 = document.createElement('h3');
@@ -73,18 +79,79 @@ addEmail.addEventListener('click', event => {
     clearUser.classList.add('clear-btn')
     user.appendChild(clearUser);
 
+    // navigate gallery buttons
+    let arrows = document.createElement('div');
+    arrows.classList.add('navigation');
+    let arrRight = document.createElement('button');
+    arrRight.append('>');
+    arrRight.classList.add('right', 'button');
+    let arrLeft =  document.createElement('button');
+    arrLeft.append('<');
+    arrLeft.classList.add('left', 'button');
+    arrows.appendChild(arrLeft);
+    arrows.appendChild(arrRight);
+    arrows.classList.add('js-hidden');
+    user.appendChild(arrows);
+    galleryNav = document.querySelectorAll('.navigation .button');
+
+    arrowNav(arrLeft);
+    arrowNav(arrRight);
+
+
     let gallery = document.createElement('div');
     gallery.classList.add('gallery');
-    user.appendChild(gallery);
-
-
-    
+    user.appendChild(gallery);    
 
     if (clearAll.style.display == 'none') {
       clearAll.style.display = 'block';
     }
   }
+
+  currentUser = userList[userNumber].id;
 });
+
+function arrowNav(navBtn) {
+  navBtn.addEventListener('click', function() {
+    galleries = this.parentElement.parentElement.querySelectorAll('.gallery');
+    // go left
+    if (this.classList.contains('left')) {
+      if (currentGallery == 0) {
+        galleries[currentGallery].classList.add('js-hidden');
+        galleries[galleries.length - 1].classList.remove('js-hidden');
+        currentGallery = galleries.length - 1;
+      } else {
+        galleries[currentGallery].classList.add('js-hidden');
+        galleries[currentGallery - 1].classList.remove('js-hidden');
+        currentGallery = currentGallery - 1;
+      }
+    } else {
+      // go right
+      if (currentGallery == galleries.length - 1) {
+        galleries[currentGallery].classList.add('js-hidden');
+        galleries[0].classList.remove('js-hidden');
+        currentGallery = 0;
+      } else {
+        galleries[currentGallery].classList.add('js-hidden');
+        galleries[currentGallery + 1].classList.remove('js-hidden');
+        currentGallery = currentGallery + 1;
+      }
+    }
+  });
+}
+
+function selectDiv(div) {
+  div.addEventListener('click', function() {
+    for (let i = 0; i < userList.length; i++) {
+      if (userList[i].id == this.id) {
+        currentUser = userList[i].id;
+        currentEmail = userList[i].email;
+        emailInput.value = userList[i].email;
+        displayEmail.innerText = 'Current email: ' + userList[i].email;
+      }
+    }
+    
+  });
+}
 
 //valid email
 const setError = (element, message) => {
@@ -128,6 +195,7 @@ const validateInputs = () => {
 //add image creates img in html for user div and checks if the image has already been linked to the user as it shouldn't display twice
 const errorMessage = document.getElementById('error-message');
 let maxImages = 8;
+let newestGallery;
 
 addImage.addEventListener('click', () => {
   let imageExist = false;
@@ -155,23 +223,58 @@ addImage.addEventListener('click', () => {
     errorMessage.innerText = 'Image already added!';
     errorMessage.style.display = 'block';
 
-  } else if (imageExist === false && currentEmail !== undefined && userList.length > 0 && validationCheck === true && userImageContainer !== undefined && userImageContainer.querySelectorAll('img').length < maxImages) {
+  } else if (imageExist === false && currentEmail !== undefined && userList.length > 0 && validationCheck === true && userImageContainer !== undefined) {
+    let userDiv = document.querySelector('#' + currentUser);
+    if (userImageContainer.querySelectorAll('img').length % maxImages == 0 && userImageContainer.querySelectorAll('img').length !== 0) {
+      let gallery = document.createElement('div');
+      gallery.classList.add('gallery');
+      userDiv.appendChild(gallery);
+    }
+
+    galleries = userImageContainer.querySelectorAll('.gallery');
+    newestGallery = Math.floor(userImageContainer.querySelectorAll('img').length / maxImages);
+
+    if (galleries.length > 1) {
+      userDiv.querySelector('.navigation').classList.remove('js-hidden');
+    }
+    for (let i = 0; i < userDiv.querySelectorAll('.gallery').length; i++) {
+      userDiv.querySelectorAll('.gallery')[i].classList.add('js-hidden');
+    }
+    galleries[newestGallery].classList.remove('js-hidden');
+
+    currentGallery = userDiv.querySelectorAll('.gallery').length - 1;
     let span = document.createElement('span');
-    span.style.setProperty('--i', userID.length+1);
+    span.style.setProperty('--i', galleries[newestGallery].children.length+1);
     let newImage = document.createElement('img');
     newImage.src = image.src;
     span.appendChild(newImage);
-    userImageContainer.querySelector('.gallery').appendChild(span);
+    galleries[newestGallery].appendChild(span);
     errorMessage.style.display = 'none';
-  } else if (userImageContainer !== undefined && userImageContainer.querySelectorAll('img').length == maxImages) {
-    //was alert, now error message. Might change
-    errorMessage.innerText = `You reached the limit of ${maxImages} images.`;
-    errorMessage.style.display = 'block';
+
   } else {
     errorMessage.innerText = 'Click on - add your email address!';
     errorMessage.style.display = 'block';
   }
 })
+
+
+
+// for loop for arrow navigation
+
+// for (let i = 0; i < galleryNav.length; i++) {
+//   console.log('running');
+//   galleryNav[i].addEventListener('click', function() {
+//     // go left
+//     if (this.innerText == '<') {
+
+//     } else {
+//       // go right
+
+//     }
+//     console.log(this);
+//   });
+// }
+
 
 // Add click event listener to document, pass event so we can check clicked item
 document.addEventListener("click", function(e){

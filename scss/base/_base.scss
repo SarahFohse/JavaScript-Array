@@ -2,6 +2,7 @@
   margin: 25px 0;
   padding-left: 20px;
   padding-top: 20px;
+  padding-right: 20px;
   width: 250px;
   height: 750px;
   background: rgba(255,255,255, .2);
@@ -46,8 +47,12 @@
   color: #fff;
 }
 #error-message {
-  color: red; 
+  color: rgb(100, 4, 4); 
   display: none;
+  margin-top: 15px;
+  background-color: rgba(223, 175, 175, 0.55);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 #error-email {
@@ -59,7 +64,15 @@
   text-align: center;
 }
 .error {
-  margin: 20px 0;
+  margin: 15px 0;
   color: red;
 }
 
+.js-hidden {
+  display: none !important;
+}
+
+// .container {
+//   margin: 0 50%;
+//   transform: translate(50%, 0%);
+// }
