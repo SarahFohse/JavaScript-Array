@@ -196,6 +196,8 @@ const validateInputs = () => {
 const errorMessage = document.getElementById('error-message');
 let maxImages = 8;
 let newestGallery;
+let popUp = document.querySelector('#popup');
+let closing = document.querySelector('.close');
 
 addImage.addEventListener('click', () => {
   let imageExist = false;
@@ -247,33 +249,33 @@ addImage.addEventListener('click', () => {
     span.style.setProperty('--i', galleries[newestGallery].children.length+1);
     let newImage = document.createElement('img');
     newImage.src = image.src;
+    newImage.classList.add('image');
     span.appendChild(newImage);
     galleries[newestGallery].appendChild(span);
     errorMessage.style.display = 'none';
 
+    //pop up image  
+    newImage.addEventListener('click', () => {
+      // console.log(newImage.src);
+      popUp.children[0].src = newImage.src;
+      popUp.classList.remove('js-hidden');
+    });
+
+    
   } else {
     errorMessage.innerText = 'Click on - add your email address!';
     errorMessage.style.display = 'block';
   }
+
+  
+
 })
 
 
+closing.addEventListener('click', () => {
+  popUp.classList.add('js-hidden');
+}) 
 
-// for loop for arrow navigation
-
-// for (let i = 0; i < galleryNav.length; i++) {
-//   console.log('running');
-//   galleryNav[i].addEventListener('click', function() {
-//     // go left
-//     if (this.innerText == '<') {
-
-//     } else {
-//       // go right
-
-//     }
-//     console.log(this);
-//   });
-// }
 
 
 // Add click event listener to document, pass event so we can check clicked item

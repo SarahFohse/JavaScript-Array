@@ -46,14 +46,14 @@
   background: #2a2a2a;
   color: #fff;
 }
-#error-message {
-  color: rgb(100, 4, 4); 
-  display: none;
-  margin-top: 15px;
-  background-color: rgba(223, 175, 175, 0.55);
-  border-radius: 10px;
-  padding: 10px;
-}
+// .error-messages {
+//   color: rgb(100, 4, 4); 
+//   display: none;
+//   margin-top: 15px;
+//   background-color: rgba(223, 175, 175, 0.55);
+//   border-radius: 10px;
+//   padding: 10px;
+// }
 
 #error-email {
   display: none;
@@ -66,6 +66,7 @@
 .error {
   margin: 15px 0;
   color: red;
+  text-align: center;
 }
 
 .js-hidden {
