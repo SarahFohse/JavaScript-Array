@@ -5,10 +5,15 @@
   }
 
   #contain {
-    margin: 25px 15px;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 30px;
+  }
+  #box {
+    margin-left: 25px;
+    margin-right: 0;
   }
 }
 
@@ -40,7 +45,7 @@
   }
   #contain {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 25px;
   }
   .user-container {
     height: 400px;
@@ -51,7 +56,12 @@
     }
   }
 }
+@media screen and (min-width: 1200px) {
 
+  #contain {
+    gap: 60px;
+  }
+}
 @media screen and (min-width: 1400px) {
   .gallery {
     width: 120px;
@@ -71,8 +81,7 @@
     }
   }
   #contain {
-    gap: 110px;
-    margin: 25px 48px;
+    gap: 50px;
   }
 }
 

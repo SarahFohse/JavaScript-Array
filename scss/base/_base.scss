@@ -1,13 +1,13 @@
 #box {
-  margin: 25px 0;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
   padding-left: 20px;
   padding-top: 20px;
   padding-right: 20px;
   width: 250px;
   height: 750px;
   background: rgba(255,255,255, .2);
-  display: inline-block;
-  margin-left: 15px;
   left: 15px;
   border-radius: 20px;
 
@@ -46,14 +46,15 @@
   background: #2a2a2a;
   color: #fff;
 }
-// .error-messages {
-//   color: rgb(100, 4, 4); 
-//   display: none;
-//   margin-top: 15px;
-//   background-color: rgba(223, 175, 175, 0.55);
-//   border-radius: 10px;
-//   padding: 10px;
-// }
+.error-message {
+  color: rgb(100, 4, 4); 
+  display: none;
+  margin-top: 15px;
+  background-color: rgba(223, 175, 175, 0.55);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
 
 #error-email {
   display: none;

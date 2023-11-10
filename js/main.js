@@ -106,8 +106,10 @@ addEmail.addEventListener('click', event => {
       clearAll.style.display = 'block';
     }
   }
-
-  currentUser = userList[userNumber].id;
+  if (userList[userNumber].id != undefined) {
+    currentUser = userList[userNumber].id;
+  }
+  
 });
 
 function arrowNav(navBtn) {
@@ -182,11 +184,16 @@ const validateInputs = () => {
   validationCheck = false;
 
  if(emailValue === '') {
-        setError(emailInput, 'Email is required');
+        // setError(emailInput, 'Email is required');
+        errorMessage.innerText = 'Email is required!';
+        errorMessage.style.display = 'block';
     } else if (!isValidEmail(emailValue)) {
-        setError(emailInput, 'Provide a valid email address');
+        // setError(emailInput, 'Provide a valid email address');
+        errorMessage.innerText = 'Provide a valid email address!';
+        errorMessage.style.display = 'block';
     } else {
-        setSuccess(emailInput);
+        // setSuccess(emailInput);
+        errorMessage.style.display = 'none';
         validationCheck = true;
     }
 };
